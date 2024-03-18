@@ -11,7 +11,7 @@ from datetime import datetime, date
 
 DATETIME_STRING_FORMAT = "%Y-%m-%d"
 
-def register_user():
+def reg_user():
     """Registers a new user by taking username and password input from the user."""
     new_username = input("New Username: ")
 
@@ -93,7 +93,7 @@ def add_task():
         task_file.write("\n".join(task_list_to_write))
     print("Task successfully added.")
 
-def view_all_tasks():
+def view_all():
     """
     Displays all tasks in the task list.
 
@@ -112,7 +112,7 @@ def view_all_tasks():
         print(f"\tTask Description:\n\t{task['description']}\n")
         print("-" * 70 + "\n")
 
-def view_my_tasks(curr_user):
+def view_mine(curr_user):
     """Displays tasks assigned to the current user."""
     print(f"\nTasks Assigned to {curr_user}:")
 
@@ -380,13 +380,13 @@ e - Exit
 : ''').lower()
     
     if menu == 'r':
-        register_user()
+        reg_user()
     elif menu == 'a':
         add_task()
     elif menu == 'va':
-        view_all_tasks()
+        view_all()
     elif menu == 'vm':
-        view_my_tasks(curr_user)
+        view_mine(curr_user)
     elif menu == 'gr':
         generate_reports()
     elif menu == 'ds' and curr_user == 'admin': 
