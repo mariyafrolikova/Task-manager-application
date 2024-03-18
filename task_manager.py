@@ -217,6 +217,11 @@ def tasks_to_string():
 def generate_reports():
     """Generates two files (task_overview.txt & user_overview.txt) for reporting"""
 
+    # only available to admins
+    if curr_user != "admin":
+        print(f"\nError: Only admins can use this option.")
+        return
+
     # Use a variable to track if reports are successfully generated
     success_flag = True
 
@@ -293,6 +298,11 @@ def generate_reports():
 def display_statistics():
     """Displays task statistics"""
 
+    # only available to admins
+    if curr_user != "admin":
+        print(f"\nError: Only admins can use this option.")
+        return
+
     with open("task_overview.txt", "r") as task_report_file:
         task_report = task_report_file.read()
 
@@ -365,12 +375,41 @@ while not logged_in:
         print("Login Successful!")
         logged_in = True
 
-
-#Main menu
-while True:
+# Main menu for non-admin users
+while curr_user != "admin":
     print()
     menu = input('''Select one of the following options:
-r - Regster a user
+r - Register a user
+a - Add a task
+va - View all tasks
+vm - View my tasks
+e - Exit
+: ''').lower()
+    
+    if menu == 'r':
+        reg_user()
+    elif menu == 'a':
+        add_task()
+    elif menu == 'va':
+        view_all()
+    elif menu == 'vm':
+        view_mine(curr_user)
+    elif menu == 'gr':
+        generate_reports()
+    elif menu == 'ds': 
+        display_statistics()
+    elif menu == 'e':
+        print('Goodbye!!!')
+        exit()
+    else:
+        print("You have made a wrong choice. Please try again.")
+
+#Main menu for admin users
+
+while curr_user == "admin":
+    print()
+    menu = input('''Select one of the following options:
+r - Register a user
 a - Add a task
 va - View all tasks
 vm - View my tasks
@@ -396,3 +435,4 @@ e - Exit
         exit()
     else:
         print("You have made a wrong choice. Please try again.")
+
